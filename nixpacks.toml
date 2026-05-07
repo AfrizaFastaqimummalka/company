@@ -1,16 +1,5 @@
 [variables]
-NIXPACKS_LARAVEL_MIGRATE = "0"
+NIXPACKS_LARAVEL_MIGRATE = "false"
 NIXPACKS_LARAVEL_SKIP_MIGRATIONS = "1"
+NIXPACKS_METADATA_SKIP_MIGRATIONS = "1"
 NIXPACKS_PHP_ROOT = "public"
-NIXPACKS_PHP_FPM_PORT = "9000"
-
-[phases.build]
-cmds = [
-  "composer install --no-dev --optimize-autoloader --no-interaction",
-  "npm install",
-  "npm run build",
-  "php artisan config:cache --no-interaction",
-  "php artisan route:cache --no-interaction",
-  "php artisan view:cache --no-interaction",
-  "php artisan storage:link"
-]
