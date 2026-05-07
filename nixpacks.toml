@@ -1,3 +1,6 @@
+[phases.setup]
+nixPkgs = ["php84", "php84Packages.composer", "nodejs_20", "nginx"]
+
 [phases.build]
 cmds = [
   "composer install --no-dev --optimize-autoloader --no-interaction",
@@ -5,8 +8,9 @@ cmds = [
   "npm run build",
   "php artisan config:cache --no-interaction",
   "php artisan route:cache --no-interaction",
-  "php artisan view:cache --no-interaction"
+  "php artisan view:cache --no-interaction",
+  "php artisan storage:link"
 ]
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=$PORT --no-interaction"
+cmd = "php-fpm -D && nginx -g 'daemon off;'"
