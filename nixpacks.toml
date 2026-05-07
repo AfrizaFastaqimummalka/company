@@ -1,5 +1,10 @@
 providers = ["php", "node"]
 
+[variables]
+NIXPACKS_NO_MIGRATE = "1"
+NIXPACKS_LARAVEL_MIGRATE = "0"
+NIXPACKS_LARAVEL_SKIP_MIGRATIONS = "1"
+
 [phases.setup]
 nixPkgs = ["php84", "php84Packages.composer", "nodejs_20", "nginx"]
 
@@ -15,4 +20,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php-fpm -D && nginx -g 'daemon off;'"
+cmd = "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"
